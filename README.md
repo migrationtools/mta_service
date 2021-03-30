@@ -1,8 +1,8 @@
 # mta_service
-Spring Boot Based Backend Service that is used to invoke the red hat migration toolkit and generate reports.  Works in conjunction with the angular mta_client.\n  <BR />
+Spring Boot Based Backend Service that is used to invoke the red hat migration toolkit and generate reports.  Works in conjunction with the angular mta_client.  <BR />
 
 
-Pre-requisites:  Maven 3.6.2 or later\n  <BR />
+Pre-requisites:  Maven 3.6.2 or later  <BR />
 
 
 A bunch of properties in application.properties need to be updated.  Watch for below properties and update them to your local settings.  
