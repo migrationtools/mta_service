@@ -1,6 +1,7 @@
 package com.nerdydev.mtawrapper.web.controllers;
 
 import com.nerdydev.mtawrapper.web.dto.CheckIndexFileDto;
+import com.nerdydev.mtawrapper.web.dto.WtcFileNamesDto;
 import com.nerdydev.mtawrapper.web.dto.WtcFolderNameDto;
 import com.nerdydev.mtawrapper.web.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +11,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -82,5 +86,26 @@ public class WeblogicToTomcatController {
         return emitter;
     }
 
+    @GetMapping("/directoryListByAscendingDate")
+    public File[] getDirectoryListByAscendingDate() {
+        File[] files = fileService.getDirectoryListByAscendingDate();
+        for (File file : files) {
+            System.out.println("Directory List by Ascending Date Starts ::: ");
+            System.out.println(file.getName() + " "
+                    + new Date(file.lastModified()));
+        }
+        System.out.println("Directory List by Ascending Date Ends ::: ");
+        return files;
+    }
+
+    @GetMapping("/directoryListByDescendingDate")
+    public List<WtcFileNamesDto> getDirectoryListByDescendingDate() {
+        File[] files = fileService.getDirectoryListByDescendingDate();
+        List<WtcFileNamesDto> wtcFileNamesDtos = new ArrayList<>();
+        for (File file : files) {
+            wtcFileNamesDtos.add(new WtcFileNamesDto(file.getName(), new Date(file.lastModified())));
+        }
+        return wtcFileNamesDtos;
+    }
 
 }

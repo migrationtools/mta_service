@@ -100,4 +100,13 @@ public class FileService {
         }
     }
 
+    public File[] getDirectoryListByAscendingDate() {
+        File files[] = FileUtils.dirListByAscendingDate(new File(outputDirectory));
+        return files;
+    }
+
+    public File[] getDirectoryListByDescendingDate() {
+        File files[] = FileUtils.dirListByDescendingDate(new File(outputDirectory));
+        return files;
+    }
 }
